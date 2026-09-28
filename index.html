@@ -2,163 +2,110 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="./images/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
-<link rel="shortcut icon" href="./images/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="ChatVAr" />
-<link rel="manifest" href="./site.webmanifest" />
-
-<title>ArilChat V2</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/peerjs@1.5.3/dist/peerjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Absensi Siswa Aril</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Fredoka',sans-serif}
-body{background:#111b21;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-#login{position:fixed;inset:0;background:#111b21;z-index:99;overflow-y:auto;padding:20px;display:flex;flex-direction:column;align-items:center}
-.login-box{width:100%;max-width:380px;background:#202c33;border-radius:16px;padding:20px;margin-top:20px}
-.logo{font-size:30px;color:#00e5ff;font-weight:800;text-align:center}
-.login-box input{width:100%;background:#2a3942;border:none;padding:14px;border-radius:10px;color:white;margin-top:10px;outline:none}
-.btn{width:100%;background:#00a884;color:white;border:none;padding:14px;border-radius:30px;font-weight:800;margin-top:12px;cursor:pointer}
-.btn2{background:#2a3942}
-.offline-area{margin-top:14px;border:1px dashed #00e5ff;border-radius:12px;padding:12px;display:none}
-.offline-area.active{display:block}
-.offline-area textarea{width:100%;background:#0b141a;color:#00e5ff;border:none;border-radius:8px;padding:8px;font-size:10px;height:80px;margin-top:8px}
-.small{font-size:11px;color:#00e5ff;line-height:1.4}
-.header{height:60px;background:#202c33;display:flex;align-items:center;padding:0 16px;justify-content:space-between}
-.avatar{width:40px;height:40px;background:#00e5ff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#111b21;font-weight:800}
-#msgs{flex:1;overflow-y:auto;padding:16px;background:#0b141a;display:flex;flex-direction:column;gap:6px}
-.bub{max-width:78%;padding:8px 12px;border-radius:8px;font-size:14px;position:relative}
-.me{background:#005c4b;align-self:flex-end;border-radius:8px 0 8px 8px}
-.you{background:#202c33;align-self:flex-start;border-radius:0 8px 8px 8px}
-.time{font-size:9px;opacity:.6;float:right;margin:4px 0 0 8px}
-.footer{height:62px;background:#202c33;display:flex;align-items:center;padding:8px;gap:8px}
-.footer input{flex:1;background:#2a3942;border:none;padding:12px 16px;border-radius:24px;color:white;outline:none}
-.send{width:44px;height:44px;background:#00a884;border-radius:50%;border:none;color:white;font-size:20px}
-.qr{margin:8px auto;background:white;padding:6px;border-radius:8px;width:fit-content}
-.copy{font-size:11px;color:#00e5ff;text-decoration:underline;cursor:pointer;float:right}
+:root{--p:#7c3aed;--b:#2563eb;--ink:#201747}
+*{box-sizing:border-box}body{margin:0;padding:18px 13px;font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#ede9fe,#dbeafe,#fce7f3);color:var(--ink);min-height:100vh}
+.wrap{max-width:520px;margin:auto}.hero{padding:24px 20px;color:white;border-radius:24px;background:linear-gradient(135deg,#6d28d9,#2563eb);box-shadow:0 12px 30px #4f46e544;margin-bottom:16px}
+.brand{font-size:11px;letter-spacing:2px;font-weight:800;opacity:.85}h1{font-size:27px;margin:9px 0}.hero p{font-size:13px;margin:0;opacity:.9}.clock{margin-top:18px;padding:13px;border-radius:15px;background:#ffffff20}
+#time{font-size:28px;font-weight:800}#date{font-size:12px}.wib{display:inline-block;margin-top:8px;padding:5px 10px;background:#ffffff25;border-radius:20px;font-size:11px}
+.card{background:#fff;border-radius:21px;padding:21px;margin-bottom:15px;box-shadow:0 8px 25px #312e8110}.card h2{font-size:19px;margin:0 0 5px}.sub{font-size:12px;color:#817b98;margin:0 0 19px}
+label.title{display:block;font-size:13px;font-weight:750;margin:0 0 8px}input[type=text]{width:100%;padding:14px;border:2px solid #e9e5f5;border-radius:12px;font-size:15px;outline:none;margin-bottom:18px}input:focus{border-color:var(--p)}
+.status{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.opt input{display:none}.opt span{display:block;text-align:center;padding:14px 5px;border:2px solid #eeeaf7;border-radius:13px;font-size:13px;font-weight:700;cursor:pointer}.opt input:checked+span{border-color:var(--p);background:#f3e8ff;color:#6d28d9}
+button{border:0;border-radius:12px;font-weight:750;cursor:pointer}.send{width:100%;padding:16px;color:#fff;background:linear-gradient(135deg,#7c3aed,#2563eb);font-size:14px}.send:disabled{opacity:.6;cursor:wait}
+.note{text-align:center;color:#88839e;font-size:11px;line-height:1.6;margin-top:12px}.success{display:none;text-align:center;padding:15px;background:#dcfce7;color:#166534;border-radius:12px;margin-top:14px;font-size:13px}.footer{text-align:center;color:#827b9f;font-size:11px;padding:10px 0 20px}#toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,100px);background:#1e1b4b;color:white;padding:13px 18px;border-radius:12px;font-size:13px;transition:.25s;max-width:90%;z-index:5}#toast.show{transform:translate(-50%,0)}
 </style>
 </head>
 <body>
-
-<div id="login">
-  <div class="logo">ArilChat</div>
-  <div style="color:#8696a0;font-size:12px">Chat Private - Kode adalah Kunci</div>
-  <div class="login-box">
-    <input id="code" placeholder="KODE RAHASIA (mis: ARIL123)" style="text-transform:uppercase">
-    <input id="name" placeholder="Nama kamu">
-    <button class="btn" onclick="online()">Masuk Online</button>
-    <button class="btn btn2" onclick="document.getElementById('off').classList.toggle('active')">Mode Offline Hotspot</button>
-    
-    <div id="off" class="offline-area">
-      <div class="small">Cara Offline:<br>1. HP A nyalain Hotspot, HP B konek ke Hotspot A<br>2. HP A -> Buat Offer -> COPY / Show QR<br>3. HP B -> Paste Offer -> Buat Answer -> COPY<br>4. HP A -> Paste Answer -> Connect</div>
-      
-      <button class="btn btn2" onclick="makeOffer()">A - Buat Offer (HOST)</button>
-      <span class="copy" onclick="copyTxt('oOut')">COPY</span>
-      <textarea id="oOut" placeholder="Offer muncul disini..."></textarea>
-      <div id="qO" class="qr"></div>
-
-      <input id="oIn" placeholder="Paste Offer dari teman" style="margin-top:12px">
-      <button class="btn btn2" onclick="makeAnswer()">B - Buat Answer dari Offer</button>
-      <span class="copy" onclick="copyTxt('aOut')">COPY</span>
-      <textarea id="aOut" placeholder="Answer muncul disini..."></textarea>
-      <div id="qA" class="qr"></div>
-
-      <input id="aIn" placeholder="HOST paste Answer disini">
-      <button class="btn" onclick="finalConnect()">HOST - Final Connect</button>
-    </div>
-  </div>
+<div class="wrap">
+<header class="hero">
+<div class="brand">ArilCode • STUDENT SYSTEM</div>
+<h1>Absensi Siswa 📚</h1><p>Isi kehadiranmu hari ini dengan mudah!</p>
+<div class="clock"><div id="time">--:--:--</div><div id="date">Memuat tanggal...</div><span class="wib">🌏 Waktu Indonesia Barat (WIB)</span></div>
+</header>
+<section class="card">
+<h2>📝 Form Absensi</h2><p class="sub">Isi data dengan benar sebelum mengirim.</p>
+<form id="form">
+<label class="title" for="name">Nama lengkap siswa</label>
+<input id="name" type="text" maxlength="60" placeholder="Masukkan nama lengkap..." autocomplete="name" required>
+<label class="title">Pilih status kehadiran</label>
+<div class="status">
+<label class="opt"><input type="radio" name="status" value="Hadir" required><span>✅ Hadir</span></label>
+<label class="opt"><input type="radio" name="status" value="Izin"><span>📩 Izin</span></label>
+<label class="opt"><input type="radio" name="status" value="Sakit"><span>🤒 Sakit</span></label>
+<label class="opt"><input type="radio" name="status" value="Alpa"><span>❌ Alpa</span></label>
 </div>
-
-<div class="header">
-  <div style="display:flex;gap:10px;align-items:center">
-    <div class="avatar">A</div>
-    <div><div id="hName" style="color:white;font-weight:700">-</div><div id="hStat" style="color:#8696a0;font-size:11px"><span id="dot" style="width:8px;height:8px;background:#ff5252;border-radius:50%;display:inline-block"></span> Offline</div></div>
-  </div>
-  <button onclick="location.reload()" style="background:none;border:none;color:white;font-size:22px">⋮</button>
+<button class="send" id="send" type="submit">Kirim Absensi 🚀</button>
+<div class="success" id="success">✅ Absensi berhasil dikirim ke guru!</div>
+</form>
+<p class="note">Data absensi tersimpan aman di Supabase. Guru bisa lihat rekap di halaman guru.</p>
+</section>
+<div class="footer">Made with by ArilCode</div>
 </div>
-
-<div id="msgs"></div>
-
-<div class="footer">
-  <input id="inp" placeholder="Ketik pesan" onkeydown="if(event.key==='Enter')send()">
-  <button class="send" onclick="send()">➤</button>
-</div>
+<div id="toast"></div>
 
 <script>
-let room='', myName='', conn, pc, dc, peer;
-const msgs=document.getElementById('msgs');
-function enc(t,k){return CryptoJS.AES.encrypt(t,k).toString()}
-function dec(c,k){try{return CryptoJS.AES.decrypt(c,k).toString(CryptoJS.enc.Utf8)}catch{return null}}
-function add(t,me){
-  const d=document.createElement('div'); d.className='bub '+(me?'me':'you');
-  const time=new Date().toLocaleTimeString().slice(0,5);
-  d.innerHTML=t+`<span class="time">${time} ${me?'✓✓':''}</span>`;
-  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
-}
-function copyTxt(id){ const el=document.getElementById(id); el.select(); document.execCommand('copy'); alert('Tersalin!'); }
+const SUPABASE_URL = "https://yrycrxdceukuiqtyielu.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlyeWNyeGRjZXVrdWlxdHlpZWx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1OTM2NDIsImV4cCI6MjEwNjE2OTY0Mn0.UheqY6RVyeNB8A7OThpEwwWYYqzUPgt7SuMRhQJy7ak";
 
-// ONLINE
-function online(){
-  room=document.getElementById('code').value.trim().toUpperCase(); myName=document.getElementById('name').value||'Anon';
-  if(room.length<3) return alert('Kode minimal 3 huruf');
-  document.getElementById('login').style.display='none';
-  document.getElementById('hName').textContent='KODE: '+room;
-  const myId='aril-'+room+'-'+Math.floor(Math.random()*999);
-  peer=new Peer(myId); 
-  peer.on('open',()=>{
-    const host=new Peer('aril-'+room);
-    host.on('connection',c=>bind(c));
-    host.on('error',()=>{
-      const c=peer.connect('aril-'+room); bind(c);
-    });
-  });
-  peer.on('connection',c=>bind(c));
+const $ = id => document.getElementById(id);
+const TZ = "Asia/Jakarta";
+function dateKey(d=new Date()){
+  return new Intl.DateTimeFormat("en-CA",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"}).format(d);
 }
-function bind(c){ conn=c; c.on('open',()=>{ document.getElementById('dot').style.background='#00e676'; document.getElementById('hStat').innerHTML='<span style="color:#00e676">● Terhubung Aman</span>'; add('Terhubung! Chat terenkripsi dengan kode: '+room,false); }); c.on('data',d=>{ const p=dec(d.e,room); if(p) add(`<b>${d.n}:</b> ${p}`,false); }); }
+function dateLabel(d=new Date()){
+  return new Intl.DateTimeFormat("id-ID",{timeZone:TZ,weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(d);
+}
+function timeLabel(d=new Date()){
+  return new Intl.DateTimeFormat("id-ID",{timeZone:TZ,hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).format(d);
+}
+function clock(){
+ const n=new Date(); 
+ $("time").textContent=timeLabel(n);
+ $("date").textContent=dateLabel(n);
+}
+clock();setInterval(clock,1000);
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2800);}
 
-// OFFLINE WEBRTC
-async function makeOffer(){
-  room=document.getElementById('code').value.toUpperCase(); if(!room) return alert('Isi kode!');
-  pc=new RTCPeerConnection(); dc=pc.createDataChannel('c'); setupDC();
-  const o=await pc.createOffer(); await pc.setLocalDescription(o);
-  pc.onicecandidate=()=>{ if(pc.iceGatheringState==='complete'){ document.getElementById('oOut').value=btoa(JSON.stringify(pc.localDescription)); new QRCode(document.getElementById('qO'),{text:document.getElementById('oOut').value,width:100,height:100}); } };
-}
-async function makeAnswer(){
-  room=document.getElementById('code').value.toUpperCase();
-  const off=document.getElementById('oIn').value.trim(); if(!off) return alert('Paste Offer!');
-  pc=new RTCPeerConnection(); pc.ondatachannel=e=>{dc=e.channel; setupDC();};
-  await pc.setRemoteDescription(JSON.parse(atob(off)));
-  const a=await pc.createAnswer(); await pc.setLocalDescription(a);
-  pc.onicecandidate=()=>{ if(pc.iceGatheringState==='complete'){ document.getElementById('aOut').value=btoa(JSON.stringify(pc.localDescription)); new QRCode(document.getElementById('qA'),{text:document.getElementById('aOut').value,width:100,height:100}); } };
-}
-async function finalConnect(){
-  const ans=document.getElementById('aIn').value.trim(); await pc.setRemoteDescription(JSON.parse(atob(ans)));
-}
-function setupDC(){
-  dc.onopen=()=>{ document.getElementById('login').style.display='none'; document.getElementById('hName').textContent='OFFLINE: '+room; document.getElementById('dot').style.background='#00e676'; document.getElementById('hStat').innerHTML='<span style="color:#00e676">● P2P Hotspot Terhubung</span>'; };
-  dc.onmessage=e=>{ const d=JSON.parse(e.data); const p=dec(d.e,room); if(p) add(`<b>${d.n}:</b> ${p}`,false); };
-}
-function send(){
-  const i=document.getElementById('inp'); if(!i.value.trim()) return;
-  const payload={e:enc(i.value,room),n:myName};
-  if(conn&&conn.open) conn.send(payload);
-  if(dc&&dc.readyState==='open') dc.send(JSON.stringify(payload));
-  add(i.value,true); i.value='';
-}
-</script>
+$("form").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const name=$("name").value.trim().replace(/\s+/g," ");
+ const status=document.querySelector('input[name="status"]:checked')?.value;
+ if(!name||!status){toast("Isi nama dan pilih status dahulu.");return;}
 
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(r => console.log('SW Terpasang Offline Siap!', r.scope))
-      .catch(e => console.log('SW Gagal', e));
-  });
-}
+ const btn=$("send");btn.disabled=true;btn.textContent="Menyimpan...";
+ $("success").style.display="none";
+ const sentAt=new Date();
+
+ try{
+   const res = await fetch(`${SUPABASE_URL}/rest/v1/absensi`,{
+     method:"POST",
+     headers:{
+       "apikey": SUPABASE_KEY,
+       "Authorization": `Bearer ${SUPABASE_KEY}`,
+       "Content-Type":"application/json",
+       "Prefer":"return=minimal"
+     },
+     body: JSON.stringify({
+  tanggal: dateLabel(sentAt),
+  jam: timeLabel(sentAt) + " WIB",
+  nama: name,
+  status: status
+})
+   });
+   if(!res.ok) throw new Error("Gagal simpan");
+   $("form").reset();
+   $("success").style.display="block";
+   $("success").textContent = `✅ ${name} - ${status} berhasil disimpan!`;
+   toast("Absensi berhasil disimpan!");
+ }catch(err){
+   console.error(err);
+   toast("Gagal menyimpan. Cek internet.");
+ }finally{
+   btn.disabled=false;btn.textContent="Kirim Absensi 🚀";
+ }
+});
 </script>
 </body>
 </html>

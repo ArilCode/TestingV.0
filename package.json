@@ -1,0 +1,26 @@
+{
+  "name": "berita-3d",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "still": "remotion still Berita out/preview.png --frame=150 --gl=swangle",
+    "render": "remotion render Berita out/berita.mp4 --codec=h264 --crf=18 --gl=swangle"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.15.19",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.0",
+    "@remotion/media-utils": "^4.0.0",
+    "@remotion/three": "^4.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "^4.0.0",
+    "three": "0.158.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "@types/three": "0.158.3",
+    "typescript": "5.3.3"
+  }
+}

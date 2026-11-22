@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TelegramClient {
     public static final String TOKEN = "8978224174:AAGS7qCDEbSAVexN2tKV3gR1x-QFU9MEEvI";
-    public static final long ADMIN_ID = 7027935587; // ganti chat ID kamu
+    public static final long ADMIN_ID = 7027935587L; // ganti chat ID kamu
 
     private static final String BASE = "https://api.telegram.org/bot" + TOKEN + "/";
 

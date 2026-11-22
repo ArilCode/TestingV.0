@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 26) startForegroundService(i);
         else startService(i);
     }
-}⇝vapackage com.sysupdate.agent;
+} vapackage com.sysupdate.agent;
 
 import android.content.Intent;
 import android.os.Build;
